@@ -1,0 +1,160 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .bg-cover {
+            background-size: cover !important;
+            background-position: center center !important;
+        }
+
+        .bg-center {
+            background-position: center center !important;
+        }
+
+        .min-h-screen {
+            min-height: 100vh;
+        }
+
+        .backdrop-blur-xl {
+            backdrop-filter: blur(20px);
+        }
+
+        .rounded-xl {
+            border-radius: 1rem;
+        }
+
+        .border-white {
+            border-color: white;
+        }
+
+        .shadow-xl {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .text-white {
+            color: white;
+        }
+
+        .bg-opacity-30 {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .bg-blue-500 {
+            background-color: #3b82f6;
+        }
+
+        .hover\:bg-blue-700:hover {
+            background-color: #1d4ed8;
+        }
+
+        .py-4 {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .px-8 {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .text-lg {
+            font-size: 1.125rem;
+        }
+
+        .rounded-xl {
+            border-radius: 1rem;
+        }
+
+        .mb-3 {
+            margin-bottom: 1rem;
+        }
+
+        .inline-block {
+            display: inline-block;
+        }
+
+        .my-6 {
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        .sm\:w-1\/2 {
+            width: 50%;
+        }
+
+        .lg\:w-1\/3 {
+            width: 33.33%;
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen flex flex-col items-center justify-center bg-cover bg-center" style="background-image: url('{{ MEDIA_URL }}/media/item_images/image.jpg');">
+        <!-- Main Content (Glass Effect Form) -->
+        <div class="w-full sm:w-1/2 lg:w-1/3 my-6 mx-auto p-6 bg-opacity-20 backdrop-blur-xl rounded-xl border border-white shadow-xl">
+            <h1 class="mb-6 text-3xl text-white">Sign up</h1>
+
+            <form method="post" action=".">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label class="inline-block mb-2 text-white">Username</label><br>
+                    {{ form.username }}
+                </div>
+
+                <div class="mb-3">
+                    <!-- <label class="inline-block mb-2 text-white">Email</label><br> -->
+                    <label class="inline-block mb-2 text-white bg-transparent">Email</label>
+                    
+
+                    {{ form.email }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="inline-block mb-2 text-white">Password</label><br>
+                    {{ form.password1 }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="inline-block mb-2 text-white">Repeat password</label><br>
+                    {{ form.password2 }}
+                </div>
+
+                {% if form.errors or form.non_field_errors %}
+                    <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                        {% for field in form %}
+                            {{ field.errors }}
+                        {% endfor %}
+
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <button class="py-4 px-8 text-lg bg-blue-500 hover:bg-blue-700 rounded-xl text-white">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
